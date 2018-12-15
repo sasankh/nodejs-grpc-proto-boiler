@@ -1,0 +1,41 @@
+{
+  "name": "nodejs-grpc-proto-boiler",
+  "version": "1.0.0",
+  "description": "Boiler for Nodejs grpc",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sasankh/nodejs-grpc-proto-boiler.git"
+  },
+  "keywords": [
+    "nodejs",
+    "grpc"
+  ],
+  "author": "Sasankh BC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sasankh/nodejs-grpc-proto-boiler/issues"
+  },
+  "homepage": "https://github.com/sasankh/nodejs-grpc-proto-boiler#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-google": "^0.11.0",
+    "eslint-plugin-import": "^2.14.0",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-istanbul": "^1.1.3",
+    "gulp-mocha": "^6.0.0",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-plumber": "^1.2.1"
+  }
+}

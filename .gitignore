@@ -1,0 +1,23 @@
+### Node ###
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+
+#others
+.DS_Store
+tests/report/*
+!tests/report/.gitkeep
+tmp/*
+logs/*
+!logs/.gitkeep
+npm-debug.log
+dump.rdb
