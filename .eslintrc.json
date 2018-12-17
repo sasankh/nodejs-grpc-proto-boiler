@@ -3,7 +3,7 @@
     "rules": {
       "indent": ["error", 2],
       "no-param-reassign": "error",
-      "max-len": ["error", 136],
+      "max-len": ["error", 152],
       "import/no-dynamic-require": 0,
       "no-underscore-dangle": ["error", {
         "allow": [
