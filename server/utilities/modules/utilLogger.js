@@ -23,7 +23,7 @@ function rpcRequest(requestId, handlerName, payload) {
     logData.payload = payload;
   }
 
-  switch(logFormat) {
+  switch (logFormat) {
   case 'json':
     main.info(JSON.stringify(logData));
     break;
@@ -33,9 +33,9 @@ function rpcRequest(requestId, handlerName, payload) {
     const payloadString = (logData.payload ? ` payload --> ${JSON.stringify(logData.payload)}` : '');
     main.info(`[${logData.requestId}] -> request-${logData.request}.${payloadString}`);
   }
-};
+}
 
-function WriteLogClass(level){
+function WriteLogClass(level) {
   this.level = level;
 
   this.write = (requestId, message, details) => {
@@ -48,7 +48,7 @@ function WriteLogClass(level){
       logData.details = details;
     }
 
-    switch(logFormat) {
+    switch (logFormat) {
     case 'json':
       main[this.level](JSON.stringify(logData));
       break;
@@ -58,7 +58,7 @@ function WriteLogClass(level){
       const detailsSentence = (logData.details ? ` -- details --> ${JSON.stringify(logData.details)}` : '');
       main[this.level](`[${logData.requestId}] -> ${logData.message}${detailsSentence}`);
     }
-  }
+  };
 }
 
 const loggers = {
@@ -75,7 +75,7 @@ function logManager(requestId, body) {
 }
 
 function logReject(requestId, body) {
-  if(body.error) {
+  if (body.error) {
     logManager(requestId, body.error);
   } else {
     const newBody = {

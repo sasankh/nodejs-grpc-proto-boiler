@@ -7,7 +7,7 @@ require('dotenv').config({
 global.__base = __dirname;
 
 const grpc = require('grpc');
-const protoLoader = require('@grpc/proto-loader');
+
 const config = require(`${global.__base}/server/config/config`);
 
 const {
@@ -46,7 +46,7 @@ async function initialize() {
   if (server.started) {
     logger.info('INITIALIZE', `Service is initialized and has bind to ${config.app.applicationBindTo}`);
   } else {
-    logger.info('INITIALIZE', `Service went through is initialization but failed start verification`, server);
+    logger.error('INITIALIZE', 'Service went through is initialization but failed start verification', server);
   }
 }
 

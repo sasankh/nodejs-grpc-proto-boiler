@@ -5,12 +5,14 @@
       "no-param-reassign": "error",
       "max-len": ["error", 152],
       "import/no-dynamic-require": 0,
+      "no-case-declarations": 0,
       "no-underscore-dangle": ["error", {
         "allow": [
           "__base"
         ]
       }],
       "strict": 0,
+      "arrow-body-style": 0,
       "comma-dangle": ["error", "never"]
     }
 }

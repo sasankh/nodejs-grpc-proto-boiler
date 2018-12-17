@@ -3,7 +3,6 @@
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
 
-const config = require(`${global.__base}/server/config/config`);
 const {
   logger
 } = require(`${global.__base}/server/utilities/index`);
