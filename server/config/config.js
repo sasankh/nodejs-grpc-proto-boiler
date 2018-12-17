@@ -14,6 +14,7 @@ exports.proto = {
   protoPath: `${global.__base}/protos`,
   internalProtoPath: `${global.__base}/protos/internal`,
   internalRpcProtoFileName: 'rpcs.proto',
+  internalRpcServiceName: 'GrpcBoilerPlate',
   externalProtoPath: `${global.__base}/protos/external`
 }
 // Log configs

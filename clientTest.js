@@ -35,7 +35,7 @@ function checkDeepHealthCheck(clientService) {
 }
 
 function makeHealthChecks() {
-  const client = new protoRpcs.GRPC_BOILER_SERVICE('localhost:50051', grpc.credentials.createInsecure());
+  const client = new protoRpcs.GrpcBoilerPlate('localhost:50051', grpc.credentials.createInsecure());
 
   checkBasicHealthCheck(client);
   checkDeepHealthCheck(client);

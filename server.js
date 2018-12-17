@@ -14,39 +14,40 @@ const {
   logger
 } = require(`${global.__base}/server/utilities/index`);
 
-// const INTERNAL_PROTO_PATH = `${global.__base}/protos/internal`;
-
-const packageDefinition = protoLoader.loadSync(config.proto.internalRpcProtoFileName, {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
-  includeDirs: [
-    config.proto.internalProtoPath
-  ]
-});
-
-const protoRpc = grpc.loadPackageDefinition(packageDefinition);
-
-/**
- * Implements the SayHello RPC method.
- */
-// function sayHello(call, callback) {
-//   callback(null, {message: 'This is response test2 ' + call.request.name})
-// }
-//
-// const services = { sayHello };
+const {
+  loadProto
+} = require(`${global.__base}/server/init/protoLoader`);
 
 const routes = require(`${global.__base}/server/routes`);
 
-const server = new grpc.Server();
-server.addService(protoRpc[config.app.applicationService].service, routes);
-server.bind(config.app.applicationBindTo, grpc.ServerCredentials.createInsecure());
-server.start();
+let server;
 
-if (server.started) {
-  logger.info('INITIALIZE', `Service is initialized and has bind to ${config.app.applicationBindTo}`);
-} else {
-  logger.info('INITIALIZE', `Service went through is initialization but failed start verification`, server);
+async function initialize() {
+  logger.info('INITIALIZE', `Initializing ${config.app.applicationService}`);
+
+  const {
+    rpcServices
+  } = await loadProto('INITIALIZE', config.proto.internalRpcProtoFileName, {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+    includeDirs: [
+      config.proto.internalProtoPath
+    ]
+  });
+
+  server = new grpc.Server();
+  server.addService(rpcServices[config.proto.internalRpcServiceName].service, routes);
+  server.bind(config.app.applicationBindTo, grpc.ServerCredentials.createInsecure());
+  server.start();
+
+  if (server.started) {
+    logger.info('INITIALIZE', `Service is initialized and has bind to ${config.app.applicationBindTo}`);
+  } else {
+    logger.info('INITIALIZE', `Service went through is initialization but failed start verification`, server);
+  }
 }
+
+initialize();

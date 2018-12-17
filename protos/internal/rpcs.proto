@@ -2,9 +2,9 @@ syntax = "proto3";
 
 import "health.proto";
 
-// The greeting service definition.
-service GRPC_BOILER_SERVICE {
-  // Sends a greeting
+// Application Services
+service GrpcBoilerPlate {
+  //health
   rpc basicHealthCheck (health.HealthRequest) returns (health.BasicHealthCheckResponse) {}
   rpc deepHealthCheck (health.HealthRequest) returns (health.DeepHealthCheckResponse) {}
 }
