@@ -41,9 +41,12 @@ function WriteLogClass(level){
   this.write = (requestId, message, details) => {
     const logData = {
       requestId,
-      message,
-      details
+      message
     };
+
+    if (details) {
+      logData.details = details;
+    }
 
     switch(logFormat) {
     case 'json':
@@ -52,7 +55,8 @@ function WriteLogClass(level){
 
     case 'sentence':
     default:
-      main[this.level](`[${logData.requestId}] -> ${logData.message} --> details --> ${JSON.stringify(logData.details)}`);
+      const detailsSentence = (logData.details ? ` -- details --> ${JSON.stringify(logData.details)}` : '');
+      main[this.level](`[${logData.requestId}] -> ${logData.message}${detailsSentence}`);
     }
   }
 }
@@ -65,6 +69,10 @@ const loggers = {
   debug: new WriteLogClass('debug'),
   silly: new WriteLogClass('silly')
 };
+
+function logManager(requestId, body) {
+  loggers[body.level].write(requestId, body.message, body.details);
+}
 
 function logReject(requestId, body) {
   if(body.error) {
@@ -83,10 +91,6 @@ function logReject(requestId, body) {
 
     logManager(requestId, newBody.error);
   }
-}
-
-function logManager(requestId, body) {
-  loggers[body.level].write(requestId, body.message, body.details);
 }
 
 module.exports = {
