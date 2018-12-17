@@ -1,5 +1,7 @@
 'use strict';
 
+global.__rootDirectory = __dirname;
+
 const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const eslint = require('gulp-eslint');
@@ -22,7 +24,9 @@ const path = {
     `${serverDir}/**/**/*.js`,
     `${serverDir}/**/**/**/*.js`
   ],
-  COVERAGE: [],
+  COVERAGE: [
+    `${serverDir}/server/handlers/*.js`
+  ],
   TESTS: [
     `${testDir}/mocha/**/js`,
     `${testDir}/mocha/**/*.js`,
@@ -54,9 +58,7 @@ function lintTest() {
 
 // unit test
 function testUnit() {
-  return gulp.src([
-    path.UNIT_TESTS
-  ], {
+  return gulp.src(path.UNIT_TESTS, {
     read: false
   })
     .pipe(plumber())
@@ -64,7 +66,7 @@ function testUnit() {
       reporter: 'mocha-jenkins-reporter',
       reporterOptions: {
         junit_report_name: 'GRPC_BOILER_SERVICE',
-        junit_report_path: '/test/report/report_unit.xml',
+        junit_report_path: './tests/report/report_unit.xml',
         junit_report_stack: '1'
       },
       timeout: 10000
@@ -77,9 +79,7 @@ function testUnit() {
 
 // integration test
 function testIntegration() {
-  return gulp.src([
-    path.INTEGRATION_TESTS
-  ], {
+  return gulp.src(path.INTEGRATION_TESTS, {
     read: false
   })
     .pipe(plumber())
@@ -87,7 +87,7 @@ function testIntegration() {
       reporter: 'mocha-jenkins-reporter',
       reporterOptions: {
         junit_report_name: 'GRPC_BOILER_SERVICE',
-        junit_report_path: '/test/report/report_integration.xml',
+        junit_report_path: './tests/report/report_integration.xml',
         junit_report_stack: '1'
       },
       timeout: 10000
@@ -109,10 +109,9 @@ function testCoverage() {
 
 // global test with coverage report
 function testGlobal() {
-  return gulp.src([
-    path.UNIT_TESTS,
-    path.INTEGRATION_TESTS
-  ], {
+  const testPaths = path.INTEGRATION_TESTS.concat(path.UNIT_TESTS);
+
+  return gulp.src(testPaths, {
     read: false
   })
     .pipe(plumber())
@@ -120,7 +119,7 @@ function testGlobal() {
       reporter: 'mocha-jenkins-reporter',
       reporterOptions: {
         junit_report_name: 'GRPC_BOILER_SERVICE',
-        junit_report_path: '/test/report/report_global.xml',
+        junit_report_path: './tests/report/report_global.xml',
         junit_report_stack: '1'
       },
       timeout: 10000
@@ -163,7 +162,7 @@ gulp.task('lint-test', gulp.series(lintTest));
 
 gulp.task('test-unit', gulp.series(testUnit));
 gulp.task('test-integration', gulp.series(testIntegration));
-gulp.task('test-unit', gulp.series(
+gulp.task('test-all', gulp.series(
   testCoverage,
   testGlobal
 ));
