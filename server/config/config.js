@@ -1,9 +1,5 @@
 'use strict';
 
-require('dotenv').config({
-  path: '../../.env'
-});
-
 // Application Environment
 exports.environment = process.env.ENVIRONMENT;
 
