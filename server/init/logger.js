@@ -83,6 +83,7 @@ function initializeLoggers(type) {
 
 async function initialize() {
   await initializeLoggers('main');
+  await initializeLoggers('health');
 }
 
 function getLogger(type) {
@@ -96,5 +97,6 @@ function getLogger(type) {
 initialize();
 
 module.exports = {
-  main: getLogger('main')
+  main: getLogger('main'),
+  health: getLogger('health')
 };

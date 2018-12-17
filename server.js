@@ -6,7 +6,6 @@ require('dotenv').config({
 
 global.__base = __dirname;
 
-// initialize
 const logger = require(`${global.__base}/server/init/logger`).main;
 
-logger.info("Server is up");
+logger.info('Server is up');
