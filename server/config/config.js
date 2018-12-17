@@ -6,9 +6,16 @@ exports.environment = process.env.ENVIRONMENT;
 // Basic Application Config
 exports.app = {
   applicationService: 'GRPC_BOILER_SERVICE', // Replace with the application name
-  port: process.env.PORT
+  applicationBindTo: process.env.APPLICATION_BIND_TO
 };
 
+// proto
+exports.proto = {
+  protoPath: `${global.__base}/protos`,
+  internalProtoPath: `${global.__base}/protos/internal`,
+  internalRpcProtoFileName: 'rpcs.proto',
+  externalProtoPath: `${global.__base}/protos/external`
+}
 // Log configs
 exports.log = {
   logLevel: process.env.LOG_LEVEL,

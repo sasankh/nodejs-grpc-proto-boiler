@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package health;
+
+// The request message
+message HealthRequest {}
+
+// Basic health check response
+message BasicHealthCheckResponse {
+  bool service =  1;
+  string message = 2;
+}
+
+// Deep health check response
+message DeepHealthCheckResponse {
+  bool service =  1;
+  string message = 2;
+}
