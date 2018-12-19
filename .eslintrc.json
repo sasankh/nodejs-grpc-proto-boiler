@@ -6,6 +6,7 @@
       "max-len": ["error", 152],
       "import/no-dynamic-require": 0,
       "no-case-declarations": 0,
+      "prefer-promise-reject-errors": 0,
       "no-underscore-dangle": ["error", {
         "allow": [
           "__base",

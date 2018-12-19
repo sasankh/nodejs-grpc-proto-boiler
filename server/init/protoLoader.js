@@ -13,17 +13,16 @@ function loadProto(protoFile, options) {
         packageDefinition,
         rpcServices
       });
-    } catch(e){
+    } catch (e) {
       reject(e);
     }
   });
-};
+}
 
 function initializeClient(protoFile, options, service, serviceUrl) {
   return new Promise(async (resolve, reject) => {
     try {
       const {
-        packageDefinition,
         rpcServices
       } = await loadProto(protoFile, options);
 
@@ -39,4 +38,4 @@ function initializeClient(protoFile, options, service, serviceUrl) {
 module.exports = {
   loadProto,
   initializeClient
-}
+};

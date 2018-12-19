@@ -17,12 +17,14 @@ const protoOptions = {
   includeDirs: config.proto.protoDirToInclude
 };
 
-const external = config.proto.external;
+const {
+  external
+} = config.proto.external;
 
 // set the service config here
 const serviceConfig = {
   rpcServiceName1: {
-    protoFile:  external.sampleServiceExample1.protoFileName1,
+    protoFile: external.sampleServiceExample1.protoFileName1,
     options: protoOptions,
     service: external.sampleServiceExample1.rpcServiceName1,
     serviceUrl: external.sampleServiceExample1.sampleServiceAddress
@@ -58,7 +60,7 @@ function getClient(client) {
     try {
       if (clientList.includes(client)) {
         if (!clients[client]) {
-          await initializeIndividual(service);
+          await initializeIndividual(client);
         }
 
         resolve(clients[client]);
@@ -81,4 +83,4 @@ initialize();
 module.exports = {
   getClient,
   initializeClient
-}
+};

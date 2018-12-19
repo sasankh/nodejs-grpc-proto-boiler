@@ -50,4 +50,4 @@ async function initialize() {
 
 initialize();
 
-module.exports =  server;
+module.exports = server;

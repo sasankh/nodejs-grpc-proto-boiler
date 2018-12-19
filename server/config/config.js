@@ -14,7 +14,7 @@ exports.proto = {
   protoPath: `${global.__base}/protos`,
   internal: {
     internalRpcProtoFileName: 'rpcs.proto',
-    internalRpcServiceName: 'GrpcBoilerPlate',
+    internalRpcServiceName: 'GrpcBoilerPlate'
   },
   protoDirToInclude: [
     `${global.__base}/protos/internal`, // required
@@ -28,7 +28,7 @@ exports.proto = {
     sampleServiceExample1: {
       protoFileName1: 'rpcs.proto',
       rpcServiceName1: 'GrpcBoilerPlate',
-      sampleServiceAddress: process.env.SAMPLE_SERVICE_ADDRESS || 'localhost:50051'  // this is just sample address
+      sampleServiceAddress: process.env.SAMPLE_SERVICE_ADDRESS || 'localhost:50051'
     }
   }
 };
