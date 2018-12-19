@@ -1,6 +1,6 @@
 'use strict';
 
-global.__rootDirectory = __dirname;
+global.__serviceRootDirectory = __dirname;
 
 const gulp = require('gulp');
 const mocha = require('gulp-mocha');

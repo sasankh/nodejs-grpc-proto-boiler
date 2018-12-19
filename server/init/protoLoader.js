@@ -3,23 +3,40 @@
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
 
-const {
-  logger
-} = require(`${global.__base}/server/utilities/index`);
+function loadProto(protoFile, options) {
+  return new Promise((resolve, reject) => {
+    try {
+      const packageDefinition = protoLoader.loadSync(protoFile, options);
+      const rpcServices = grpc.loadPackageDefinition(packageDefinition);
 
-module.exports.loadProto = (requestId, protoFile, options) => {
-  return new Promise((resolve) => {
-    logger.debug(requestId, 'loadProto', {
-      protoFile,
-      options
-    });
-
-    const packageDefinition = protoLoader.loadSync(protoFile, options);
-    const rpcServices = grpc.loadPackageDefinition(packageDefinition);
-
-    resolve({
-      packageDefinition,
-      rpcServices
-    });
+      resolve({
+        packageDefinition,
+        rpcServices
+      });
+    } catch(e){
+      reject(e);
+    }
   });
 };
+
+function initializeClient(protoFile, options, service, serviceUrl) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const {
+        packageDefinition,
+        rpcServices
+      } = await loadProto(protoFile, options);
+
+      const client = new rpcServices[service](serviceUrl, grpc.credentials.createInsecure());
+
+      resolve(client);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+module.exports = {
+  loadProto,
+  initializeClient
+}

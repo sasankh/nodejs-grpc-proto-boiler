@@ -27,19 +27,17 @@ async function initialize() {
 
   const {
     rpcServices
-  } = await loadProto('INITIALIZE', config.proto.internalRpcProtoFileName, {
+  } = await loadProto(config.proto.internal.internalRpcProtoFileName, {
     keepCase: true,
     longs: String,
     enums: String,
     defaults: true,
     oneofs: true,
-    includeDirs: [
-      config.proto.internalProtoPath
-    ]
+    includeDirs: config.proto.protoDirToInclude
   });
 
   server = new grpc.Server();
-  server.addService(rpcServices[config.proto.internalRpcServiceName].service, routes);
+  server.addService(rpcServices[config.proto.internal.internalRpcServiceName].service, routes);
   server.bind(config.app.applicationBindTo, grpc.ServerCredentials.createInsecure());
   server.start();
 
@@ -51,3 +49,5 @@ async function initialize() {
 }
 
 initialize();
+
+module.exports =  server;

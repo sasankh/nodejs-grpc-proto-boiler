@@ -8,7 +8,8 @@
       "no-case-declarations": 0,
       "no-underscore-dangle": ["error", {
         "allow": [
-          "__base"
+          "__base",
+          "__serviceRootDirectory"
         ]
       }],
       "strict": 0,

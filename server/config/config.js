@@ -12,10 +12,25 @@ exports.app = {
 // proto
 exports.proto = {
   protoPath: `${global.__base}/protos`,
-  internalProtoPath: `${global.__base}/protos/internal`,
-  internalRpcProtoFileName: 'rpcs.proto',
-  internalRpcServiceName: 'GrpcBoilerPlate',
-  externalProtoPath: `${global.__base}/protos/external`
+  internal: {
+    internalRpcProtoFileName: 'rpcs.proto',
+    internalRpcServiceName: 'GrpcBoilerPlate',
+  },
+  protoDirToInclude: [
+    `${global.__base}/protos/internal`, // required
+    // other proto dir to include if any
+    `${global.__base}/protos/external`
+  ],
+  external: {
+    // config for external service protos
+    // below is just an example. any related attribute can be added on the service object
+    // create new objects below
+    sampleServiceExample1: {
+      protoFileName1: 'rpcs.proto',
+      rpcServiceName1: 'GrpcBoilerPlate',
+      sampleServiceAddress: process.env.SAMPLE_SERVICE_ADDRESS || 'localhost:50051'  // this is just sample address
+    }
+  }
 };
 
 // Log configs
