@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Boiler for Nodejs grpc",
   "main": "server.js",
+  "engine": ">= 10.15.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

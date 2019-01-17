@@ -1,0 +1,8 @@
+.DS_Store
+documents
+logs
+tests
+.env.example
+.gitignore
+gulpfile.js
+README.md
