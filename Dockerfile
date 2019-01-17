@@ -2,7 +2,7 @@
 # Base Image
 FROM node:10.15.0-alpine
 
-WORKDIR /srv/www/nodejs_service/
+WORKDIR /app
 
 # Install dependencies
 COPY ./package.json ./
