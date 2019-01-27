@@ -3,6 +3,7 @@ node_modules
 documents
 logs
 tests
+.env
 .env.example
 .gitignore
 gulpfile.js

@@ -14,6 +14,8 @@ node_modules/
 
 #others
 .DS_Store
+documents
+documents/*
 tests/report/*
 !tests/report/.gitkeep
 tmp/*
