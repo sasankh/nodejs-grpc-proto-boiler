@@ -23,28 +23,32 @@ const routes = require(`${global.__base}/server/routes`);
 let server;
 
 async function initialize() {
-  logger.info('INITIALIZE', `Initializing ${config.app.applicationService}`);
+  try {
+    logger.info('INITIALIZE', `Initializing ${config.app.applicationService}`);
 
-  const {
-    rpcServices
-  } = await loadProto(config.proto.internal.internalRpcProtoFileName, {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true,
-    includeDirs: config.proto.protoDirToInclude
-  });
+    const {
+      rpcServices
+    } = await loadProto(config.proto.internal.internalRpcProtoFileName, {
+      keepCase: true,
+      longs: String,
+      enums: String,
+      defaults: true,
+      oneofs: true,
+      includeDirs: config.proto.protoDirToInclude
+    });
 
-  server = new grpc.Server();
-  server.addService(rpcServices[config.proto.internal.internalRpcServiceName].service, routes);
-  server.bind(config.app.applicationBindTo, grpc.ServerCredentials.createInsecure());
-  server.start();
+    server = new grpc.Server();
+    server.addService(rpcServices[config.proto.internal.internalRpcServiceName].service, routes);
+    server.bind(config.app.applicationBindTo, grpc.ServerCredentials.createInsecure());
+    server.start();
 
-  if (server.started) {
-    logger.info('INITIALIZE', `Service is initialized and has bind to ${config.app.applicationBindTo}`);
-  } else {
-    logger.error('INITIALIZE', 'Service went through is initialization but failed start verification', server);
+    if (server.started) {
+      logger.info('SERVICE', `Service is initialized and has bind to ${config.app.applicationBindTo}`);
+    } else {
+      logger.error('SERVICE', 'Service went through is initialization but failed start verification', server);
+    }
+  } catch (e) {
+    logger.error('SERVICE', 'Problem with service', e);
   }
 }
 

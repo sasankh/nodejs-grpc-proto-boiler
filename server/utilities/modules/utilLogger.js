@@ -45,7 +45,14 @@ function WriteLogClass(level) {
     };
 
     if (details) {
-      logData.details = details;
+      if (details.stack && details.message) {
+        logData.details = {
+          message: details.message,
+          stack: details.stack
+        };
+      } else {
+        logData.details = details;
+      }
     }
 
     switch (logFormat) {
